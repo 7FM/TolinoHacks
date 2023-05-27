@@ -12,6 +12,8 @@
           zip
           unzip
           android-tools
+          util-linux
+          sqlite
         ];
       };
     });
