@@ -1,0 +1,7 @@
+.direnv
+backups
+update
+*.zip
+*.img
+*.tar
+*.xz
