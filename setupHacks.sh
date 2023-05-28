@@ -32,3 +32,6 @@ read -p "Wait until the tolino booted up and adb is available, then press Enter 
 . ./helper/updateSettings.sh
 . ./helper/cleanupAPKs.sh
 . ./helper/patchEPubProd.sh
+
+# Reboot after we applied all desired changes
+adb reboot

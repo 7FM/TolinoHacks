@@ -43,6 +43,9 @@ sed -i 's/setprop ro.adb.secure.*$/setprop ro.adb.secure 0/' "${ramdiskDir}/init
 mv "${ramdiskDir}/sbin/adbd" "${mntPoint}/adbd_unpatched"
 mv "${ramdiskDir}/sbin/adbd_patched" "${ramdiskDir}/sbin/adbd"
 
+# Copy known working binary... Sry, I do not like this either but at least it works...
+# cp adbd "${ramdiskDir}/sbin/adbd"
+
 # Repack the ramdisk
 # NOTE: it is extremely important to be inside the ramdiskDir! Otherwise `find` returns a prefix and an invalid ramdisk will be created!
 cd "$ramdiskDir"

@@ -24,3 +24,6 @@ adb reboot recovery
 . ./helper/updateSettings.sh
 . ./helper/cleanupAPKs.sh
 . ./helper/patchEPubProd.sh
+
+# Reboot after we applied all desired changes
+adb reboot
