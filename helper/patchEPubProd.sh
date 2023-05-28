@@ -33,7 +33,8 @@ sed -i 's/FTU_COUNTRIES_RESELLERS_URL=.*$/FTU_COUNTRIES_RESELLERS_URL=0.0.0.0/' 
 sed -i 's/FTU_REPORTING_SELECTED_RESELLER_URL=.*$/FTU_REPORTING_SELECTED_RESELLER_URL=0.0.0.0/' "assets/environments/app.properties.prod"
 # sed -i 's/UPDATE_CHECK_URL=.*$/UPDATE_CHECK_URL=0.0.0.0/' "assets/environments/app.properties.prod"
 sed -i 's/HOTSPOT_NETDATA_URL=.*$/HOTSPOT_NETDATA_URL=0.0.0.0/' "assets/environments/app.properties.prod"
-sed -i 's/PING_URL=.*$/PING_URL=0.0.0.0/' "assets/environments/app.properties.prod"
+# This one is needed to check whether we have an internet connection
+# sed -i 's/PING_URL=.*$/PING_URL=0.0.0.0/' "assets/environments/app.properties.prod"
 sed -i 's/INVENTORY_URL=.*$/INVENTORY_URL=0.0.0.0/' "assets/environments/app.properties.prod"
 sed -i 's/FAMILY_URL=.*$/FAMILY_URL=0.0.0.0/' "assets/environments/app.properties.prod"
 sed -i 's/FAMILY_RESELLERS_URL=.*$/FAMILY_RESELLERS_URL=0.0.0.0/' "assets/environments/app.properties.prod"
