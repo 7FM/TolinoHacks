@@ -4,6 +4,7 @@ backups
 update
 mnt
 build
+EPubProdDecomp
 *.disas
 *.zip
 *.img
