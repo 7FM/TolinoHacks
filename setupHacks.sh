@@ -30,3 +30,5 @@ fastboot reboot
 read -p "Wait until the tolino booted up and adb is available, then press Enter to continue" </dev/tty
 
 . ./helper/updateSettings.sh
+. ./helper/cleanupAPKs.sh
+. ./helper/patchEPubProd.sh

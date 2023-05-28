@@ -22,3 +22,5 @@ adb reboot recovery
 #. ./helper/flashRecoveryImage.sh
 . ./helper/flashBootImage.sh
 . ./helper/updateSettings.sh
+. ./helper/cleanupAPKs.sh
+. ./helper/patchEPubProd.sh

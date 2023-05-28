@@ -1,0 +1,11 @@
+--- res/layout/home_activity.xml
++++ res/layout/home_activity.xml
+@@ -4,7 +4,7 @@
+   xmlns:context="http://schemas.android.com/apk/res/de.telekom.epub">
+     <include layout="@layout/home_activity_main_menu" />
+     <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+-        <FrameLayout android:id="@id/home_activity_app_area_bottom_part" android:layout_width="fill_parent" android:layout_height="315.0dip" android:layout_alignParentBottom="true">
++        <FrameLayout android:id="@id/home_activity_app_area_bottom_part" android:layout_width="fill_parent" android:layout_height="1.0px" android:layout_alignParentBottom="true">
+             <include android:layout_width="fill_parent" android:layout_height="fill_parent" layout="@layout/home_activity_bottom_area" />
+             <include android:layout_width="fill_parent" android:layout_height="fill_parent" layout="@layout/home_activity_bottom_area_activation" />
+             <ImageView android:id="@id/home_activity_hotel_mode_image" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="center" />

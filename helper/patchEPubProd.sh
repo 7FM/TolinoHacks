@@ -3,19 +3,65 @@
 echo "Patching the EPubProd APK"
 
 # NOTE: the name may not be altered
-patchedAPK="EPubProd.apk"
+patchedAPK="${SCRIPTPATH}/EPubProd.apk"
+patchFolder="${SCRIPTPATH}/apkPatches"
+apkUnzipDir="${SCRIPTPATH}/EPubProd"
+apkDecomDir="${SCRIPTPATH}/EPubProdDecomp"
 
 # Obtain the EPubProd.apk
+cd "${SCRIPTPATH}"
 adb pull /system/app/EPubProd.apk
 hash=`sha256 EPubProd.apk`
 cp EPubProd.apk "EPubProd_${hash}.apk"
 echo "Backing up unpatched EPubProd.apk as EPubProd_${hash}.apk"
 
-# Apply patches/changes
-TODO
+# unzip apk
+rm -rf "$apkUnzipDir"
+mkdir -p "$apkUnzipDir"
+cd "$apkUnzipDir"
+unzip "$patchedAPK"
+rm "$patchedAPK"
+# Disable error reporting
+sed -i 's/REPORT_ERRORS=.*$/REPORT_ERRORS=FALSE/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+# Disabling some URLs
+sed -i 's/FTU_COUNTRIES_RESELLERS_URL=.*$/FTU_COUNTRIES_RESELLERS_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/FTU_REPORTING_SELECTED_RESELLER_URL=.*$/FTU_REPORTING_SELECTED_RESELLER_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+# sed -i 's/UPDATE_CHECK_URL=.*$/UPDATE_CHECK_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/HOTSPOT_NETDATA_URL=.*$/HOTSPOT_NETDATA_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/PING_URL=.*$/PING_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/INVENTORY_URL=.*$/INVENTORY_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/FAMILY_URL=.*$/FAMILY_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/FAMILY_RESELLERS_URL=.*$/FAMILY_RESELLERS_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/FEEDBACK_URL=.*$/FEEDBACK_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/LOST_DATA_RECOVERY_URL=.*$/LOST_DATA_RECOVERY_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
+sed -i 's/RECOMMENDATIONS_URL=.*$/RECOMMENDATIONS_URL=0.0.0.0/' "${apkUnzipDir}/assets/environments/app.properties.prod"
 
+# Zip apk again!
+zip -r "$patchedAPK" *
+
+# Decompile APK
+mkdir -p "$apkDecomDir"
+cd "$apkDecomDir"
+apktool d "$patchedAPK"
+cd EPubProd
+# Improve some menu names
+sed -i 's/To my books/Library/g' "res/values/strings.xml"
+sed -i 's/My books/Library/g' "res/values/strings.xml"
+sed -i 's/To my books/Library/g' "res/values-en/strings.xml"
+sed -i 's/My books/Library/g' "res/values-en/strings.xml"
+
+# Apply patches/changes
+for i in "${patchFolder}"/*.patch; do
+#   patch -d "$LOCAL_MANIFESTS_DIR" -p1 --binary -l < "$i";
+  patch -p0 --binary -l < "$i";
+done
+
+# Compile APK again!
+cd ..
+apktool b EPubProd -o "$patchedAPK"
 
 echo "Uploading patched EPubProd APK"
+cd "${SCRIPTPATH}"
 
 # Commands are taken from: https://www.mobileread.com/forums/showpost.php?p=3951131&postcount=18
 
