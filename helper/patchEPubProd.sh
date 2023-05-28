@@ -11,7 +11,7 @@ apkDecomDir="${SCRIPTPATH}/EPubProdDecomp"
 # Obtain the EPubProd.apk
 cd "${SCRIPTPATH}"
 adb pull /system/app/EPubProd.apk
-hash=`sha256 EPubProd.apk`
+hash=`sha256sum EPubProd.apk`
 cp EPubProd.apk "EPubProd_${hash}.apk"
 echo "Backing up unpatched EPubProd.apk as EPubProd_${hash}.apk"
 
