@@ -1,7 +1,12 @@
 .direnv
+.vscode
 backups
 update
+mnt
+build
+*.disas
 *.zip
 *.img
 *.tar
 *.xz
+*.db

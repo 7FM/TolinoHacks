@@ -14,6 +14,13 @@
           android-tools
           util-linux
           sqlite
+
+          # Disassembler:
+          gcc-arm-embedded
+          # Build tools
+          gcc
+          cmake
+          gnumake
         ];
       };
     });
