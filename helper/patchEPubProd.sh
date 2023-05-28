@@ -18,7 +18,7 @@ echo "Backing up unpatched EPubProd.apk as EPubProd_${hash}.apk"
 rm -rf "$apkDecomDir"
 mkdir -p "$apkDecomDir"
 cd "$apkDecomDir"
-apktool d "$patchedAPK"
+apktool d -k -m -f "$patchedAPK"
 cd EPubProd
 # Improve some menu names
 sed -i 's/To my books/Library/g' "res/values/strings.xml"
@@ -49,7 +49,7 @@ done
 
 # Compile APK again!
 cd ..
-apktool b EPubProd -o "$patchedAPK"
+apktool b EPubProd -c -f -o "$patchedAPK"
 
 echo "Uploading patched EPubProd APK"
 cd "${SCRIPTPATH}"
