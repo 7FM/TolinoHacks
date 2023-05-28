@@ -7,7 +7,7 @@ When fastboot is still stuck at:
 ```
 < waiting for any device >
 ```
-and the tolino is already booted, then make sure you have the required udev rules in place:
+and the tolino has already booted, then make sure you have the required udev rules in place:
 ```
 # Tolino Page 2 in Fastboot mode
 SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", ATTR{idProduct}=="0d02", MODE="0666", GROUP="plugdev"
