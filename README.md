@@ -10,6 +10,17 @@
   - Make secret developer debug option menus available: simply search for either `42` or `43` in your library
   - Remove the advertising/recommendation area (shrink to 1 pixel), though this somewhat ruins the home screen layout
 
+## Tested with version:
+- `16.1.0`
+
+## WARNING
+Be aware that updating to the patched `EPubProd.apk` seems to reset the Tolino. Thus:
+- all books are reimported: meaning they will all be marked as unread again, progress as well as custom created collections are lost
+- you have to go through the setup screen again
+- (I do not use the seller stores on the Tolino, so no guarantees that they are still working. Also, I use my Tolino primarly in flightmode)
+
+If someone knows/finds a way to either restore the previous settings/state or to change the `EPubProd.apk` in place without deleting the state in the first place, then please let me know!
+
 # How to enter fastboot mode
 1. Connect your PC with the Tolino via USB.
 2. Shut the Tolino down and wait approx. 5 seconds
