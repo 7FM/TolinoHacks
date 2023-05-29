@@ -41,6 +41,7 @@ sed -i 's/setprop ro.adb.secure.*$/setprop ro.adb.secure 0/' "${ramdiskDir}/init
 # Then run it
 ./tools/binary_patcher/build/binary_patcher "${ramdiskDir}/sbin/adbd" "${ramdiskDir}/sbin/adbd_patched"
 mv "${ramdiskDir}/sbin/adbd" "${mntPoint}/adbd_unpatched"
+chmod +x "${ramdiskDir}/sbin/adbd_patched"
 mv "${ramdiskDir}/sbin/adbd_patched" "${ramdiskDir}/sbin/adbd"
 
 # Copy known working binary... Sry, I do not like this either but at least it works...
