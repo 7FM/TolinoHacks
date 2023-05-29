@@ -44,9 +44,6 @@ mv "${ramdiskDir}/sbin/adbd" "${mntPoint}/adbd_unpatched"
 chmod +x "${ramdiskDir}/sbin/adbd_patched"
 mv "${ramdiskDir}/sbin/adbd_patched" "${ramdiskDir}/sbin/adbd"
 
-# Copy known working binary... Sry, I do not like this either but at least it works...
-# cp adbd "${ramdiskDir}/sbin/adbd"
-
 # Repack the ramdisk
 # NOTE: it is extremely important to be inside the ramdiskDir! Otherwise `find` returns a prefix and an invalid ramdisk will be created!
 cd "$ramdiskDir"
