@@ -22,3 +22,8 @@ as explained [here](https://stackoverflow.com/a/53887437).
 1. **Unplug** your PC from the Tolino
 2. Shut the Tolino down and wait approx. 5 seconds
 3. Just keep holding the power button until the recovery screen or TWRP pops up
+
+# Reading/Inspiration sources:
+- https://www.mobileread.com/forums/showthread.php?t=327186
+- https://cweiske.de/tagebuch/tag/tolino
+- https://blog.mx17.net/2021/11/17/tolino-shine-3-patch-adbd-to-run-as-root/
