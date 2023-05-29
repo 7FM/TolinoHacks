@@ -67,8 +67,10 @@ int main(int argc, char **argv) {
   unsigned found[NUM_ELEM(expectedOccurrences)];
   std::memset(found, 0, sizeof(found));
   uint8_t buf[sizeof(searchSequence[0])];
-  std::memset(buf, 0xFF, sizeof(buf));
 
+  // Initialize the buffer!
+  input.read(reinterpret_cast<char *>(buf + 2), sizeof(buf) - 2);
+  auto validBytes = input.gcount();
   while (input) {
     // move bytes to the left!
     for (unsigned i = 2; i < sizeof(buf); ++i) {
@@ -76,6 +78,7 @@ int main(int argc, char **argv) {
     }
     // Only read two new bytes
     input.read(reinterpret_cast<char *>(buf + sizeof(buf) - 2), 2);
+    validBytes += input.gcount();
     for (unsigned i = 0; i < NUM_ELEM(expectedOccurrences); ++i) {
       if (std::memcmp(buf, searchSequence[i], sizeof(buf)) == 0) {
         ++found[i];
@@ -83,15 +86,27 @@ int main(int argc, char **argv) {
                      replaceSequenceSizes[i]);
         // We can probably use seek here but I am lazy to look this up... just
         // read n times a single byte to "skip" forward
-        for (unsigned i = replaceSequenceSizes[i] - sizeof(buf); i > 0; --i) {
+        for (unsigned k = replaceSequenceSizes[i] - sizeof(buf); k > 0; --k) {
           input.read(reinterpret_cast<char *>(buf), 1);
+        }
+        if (input) {
+          // Initialize the buffer!
+          input.read(reinterpret_cast<char *>(buf + 2), sizeof(buf) - 2);
+          validBytes = input.gcount();
+        } else {
+          validBytes = 0;
         }
         goto skip_copy;
       }
     }
-    output.write(reinterpret_cast<const char *>(buf), sizeof(buf));
+    output.write(reinterpret_cast<const char *>(buf), 2);
+    validBytes -= 2;
   skip_copy:
     void(); /*dummy jump position*/
+  }
+  // Write the remaining buffer back!
+  if (validBytes) {
+    output.write(reinterpret_cast<const char *>(buf + 2), validBytes);
   }
 
   for (unsigned i = 0; i < NUM_ELEM(expectedOccurrences); ++i) {
