@@ -12,16 +12,25 @@
 
 ## Tested with version:
 - `16.1.0`
+- `16.2.0`
 
 ## WARNING
-Be aware that updating to the patched `EPubProd.apk` seems to reset the Tolino. Thus:
-- all books are reimported: meaning they will all be marked as unread again, progress as well as custom created collections are lost
-- you have to go through the setup screen again
+- ALWAYS make sure to create a backup first
 - (I do not use the seller stores on the Tolino, so no guarantees that they are still working. Also, I use my Tolino primarly in flightmode)
 
-If someone knows/finds a way to either restore the previous settings/state or to change the `EPubProd.apk` in place without deleting the state in the first place, then please let me know!
+# Usage
 
-# How to enter fastboot mode
+1. Download the latest update from https://mytolino.de/software-updates-tolino-ereader/ and place it in the same folder as the `setupHacks.sh` script and ensure the file is named `update.zip`
+2. Run `setupHacks.sh`
+3. Once prompted, mount the Tolino (usually `/dev/sdX`)
+4. Copy `update.zip` to the Tolino
+5. Reboot your Tolino
+6. Wait until adb is available (check via `adb devices`)
+7. Continue executing the `setupHacks.sh` script by pressing enter
+8. Profit
+9. Optional: mount your Tolino again and remove the `update.zip` (not sure why but it doesn't seem to be cleaned up at least when using TWRP)
+
+# How to enter fastboot mode (should no longer be required)
 1. Connect your PC with the Tolino via USB.
 2. Shut the Tolino down and wait approx. 5 seconds
 3. Just keep holding the power button until fastboot finds the device (note this takes approx. 30s)
@@ -41,7 +50,7 @@ SUBSYSTEM=="usb", ATTR{idVendor}=="1f85", ATTR{idProduct}=="6056", MODE="0666", 
 ```
 as explained [here](https://stackoverflow.com/a/53887437).
 
-# How to enter recovery mode
+# How to enter recovery mode (should no longer be required)
 1. **Unplug** your PC from the Tolino
 2. Shut the Tolino down and wait approx. 5 seconds
 3. Just keep holding the power button until the recovery screen or TWRP pops up

@@ -9,7 +9,8 @@ apkDecomDir="${SCRIPTPATH}/EPubProdDecomp"
 
 # Obtain the EPubProd.apk
 cd "${SCRIPTPATH}"
-adb pull /system/app/EPubProd.apk
+cp "${unzipPath}/system/app/EPubProd.apk" "EPubProd.apk"
+
 hash=`sha256sum EPubProd.apk`
 cp EPubProd.apk "EPubProd_${hash}.apk"
 echo "Backing up unpatched EPubProd.apk as EPubProd_${hash}.apk"
@@ -55,12 +56,4 @@ apktool b EPubProd -c -f -o "$patchedAPK"
 echo "Uploading patched EPubProd APK"
 cd "${SCRIPTPATH}"
 
-# Commands are taken from: https://www.mobileread.com/forums/showpost.php?p=3951131&postcount=18
-
-adb shell mount -o remount,rw /system
-adb push "$patchedAPK" /system/app/
-adb shell chown root.root /system/app/EPubProd.apk
-adb shell chmod 644 /system/app/EPubProd.apk
-adb shell chcon u:object_r:system_file:s0 /system/app/EPubProd.apk
-adb shell mount -o remount,ro /system
-
+cp "$patchedAPK" "${unzipPath}/system/app/EPubProd.apk"
